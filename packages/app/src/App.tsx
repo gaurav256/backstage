@@ -111,17 +111,15 @@ import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 
+const githubProvider: SignInProviderConfig = {
+  id: 'github-auth-provider',
+  title: 'GitHub',
+  message: 'Sign in using GitHub',
+  apiRef: githubAuthApiRef,
+};
+
 const app = createApp({
   apis,
-  components: {
-    SignInPage: props => (
-      <SignInPage
-        {...props}
-        auto
-        provider={githubProvider}
-      />
-    ),
-  },
   plugins: Object.values(plugins),
   icons: {
     // Custom icon example
@@ -132,16 +130,13 @@ const app = createApp({
   // { name: 'tech-radar', description: 'Enables the tech radar plugin' },
   // ],
   components: {
-    SignInPage: props => {
-      return (
-        <SignInPage
-          {...props}
-          providers={['guest', 'custom', ...providers]}
-          title="Select a sign-in method"
-          align="center"
-        />
-      );
-    },
+    SignInPage: props => (
+      <SignInPage
+        {...props}
+        auto
+        provider={githubProvider}
+      />
+    ),
   },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
@@ -294,13 +289,6 @@ const routes = (
     <Route path="/score-board" element={<ScoreBoardPage />} />
   </FlatRoutes>
 );
-
-const githubProvider: SignInProviderConfig = {
-  id: 'github-auth-provider',
-  title: 'GitHub',
-  message: 'Sign in using GitHub',
-  apiRef: githubAuthApiRef,
-};
 
 export default app.createRoot(
   <>
