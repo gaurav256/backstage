@@ -108,9 +108,20 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common'
 import { PlaylistIndexPage } from '@backstage/plugin-playlist';
 import { TwoColumnLayout } from './components/scaffolder/customScaffolderLayouts';
 import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
+import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 
 const app = createApp({
   apis,
+  components: {
+    SignInPage: props => (
+      <SignInPage
+        {...props}
+        auto
+        provider={githubProvider}
+      />
+    ),
+  },
   plugins: Object.values(plugins),
   icons: {
     // Custom icon example
@@ -283,6 +294,13 @@ const routes = (
     <Route path="/score-board" element={<ScoreBoardPage />} />
   </FlatRoutes>
 );
+
+const githubProvider: SignInProviderConfig = {
+  id: 'github-auth-provider',
+  title: 'GitHub',
+  message: 'Sign in using GitHub',
+  apiRef: githubAuthApiRef,
+};
 
 export default app.createRoot(
   <>
