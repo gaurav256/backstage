@@ -173,7 +173,7 @@ allure:
 integrations:
   github:
     - host: github.com
-      token: ${GITHUB_TOKEN}
+      token: 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
   ### Example for how to add your GitHub Enterprise instance using the API:
   # - host: ghe.example.net
   #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -304,9 +304,8 @@ auth:
         clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
     github:
       development:
-        clientId: ${AUTH_GITHUB_CLIENT_ID}
-        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
-        enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
+        clientId: 31ae3d5dd96ad48e85ce
+        clientSecret: ab1197d501503bc53c37cb4c59c56502d1e721bd
     gitlab:
       development:
         clientId: ${AUTH_GITLAB_CLIENT_ID}
