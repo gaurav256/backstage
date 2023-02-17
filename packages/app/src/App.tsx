@@ -108,16 +108,6 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common'
 import { PlaylistIndexPage } from '@backstage/plugin-playlist';
 import { TwoColumnLayout } from './components/scaffolder/customScaffolderLayouts';
 import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
-import { githubAuthApiRef } from '@backstage/core-plugin-api';
-import { SignInProviderConfig } from '@backstage/core-components';
-
-
-const githubProvider: SignInProviderConfig = {
-  id: 'github-auth-provider',
-  title: 'GitHub',
-  message: 'Sign in using GitHub',
-  apiRef: githubAuthApiRef,
-};
 
 const app = createApp({
   apis,
@@ -131,13 +121,16 @@ const app = createApp({
   // { name: 'tech-radar', description: 'Enables the tech radar plugin' },
   // ],
   components: {
-    SignInPage: props => (
-      <SignInPage
-        {...props}
-        auto
-        provider={githubProvider}
-      />
-    ),
+    SignInPage: props => {
+      return (
+        <SignInPage
+          {...props}
+          providers={['guest', 'custom', ...providers]}
+          title="Select a sign-in method"
+          align="center"
+        />
+      );
+    },
   },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
